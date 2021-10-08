@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  api:
+    build: ./api
+    image: sophm127/dctest:0.1
+    ports:
+      - "3000:3000"
+
+depends_on:
+      - pg
+    volumes:
+      - .api/src:/usr/app/src
+    enviroment:
+      - PG_CONNECTION_STRING=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@pg:5432/${POSTGRES}
+    
+  pg:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    enviroment:
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      #- PGData=/var/lib/postgresql/data
+    volumes:
+      -./_volumes/pgdata/:var/lib/postgresql/date
