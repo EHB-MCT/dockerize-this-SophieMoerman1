@@ -13,7 +13,9 @@ const owners = [{
  * @returns {object} with "message" param containing "hello world"
  */
 server.get("/", (req, res) => {
-  res.send({ message: "hello world" })
+  res.send({
+    message: "hello world"
+  })
 })
 
 /**
